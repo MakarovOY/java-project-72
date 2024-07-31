@@ -1,23 +1,29 @@
 plugins {
-    id("java")
+    application
     jacoco
+    id("java")
     id ("checkstyle")
     id("io.freefair.lombok") version "8.6"
     id("com.github.johnrengelman.shadow") version "8.1.1"
-    application
+
 }
-application {
-    mainClass.set("hexlet.code.App")
-}
+
 
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
+
+application {
+    mainClass.set("hexlet.code.App")
+}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation("com.h2database:h2:2.2.220")
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation("org.postgresql:postgresql:42.7.2")
     implementation("gg.jte:jte:3.1.9")
     implementation("io.javalin:javalin:6.1.3")
     implementation("io.javalin:javalin-bundle:6.1.3")
@@ -31,11 +37,13 @@ jacoco {
     toolVersion = "0.8.11"
 }
 
+
 tasks.test {
     useJUnitPlatform()
 }
 tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
+
     }
 }

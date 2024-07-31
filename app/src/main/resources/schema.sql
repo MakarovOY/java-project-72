@@ -1,0 +1,8 @@
+DROP TABLE IF EXISTS urls;
+
+CREATE TABLE urls (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    url VARCHAR,
+    created_at TIMESTAMP
+);
+

@@ -14,6 +14,8 @@ install:
 
 test:
 	./gradlew test
+report:
+	./gradlew jacocoTestReport
 
 report:
 	gradle jacocoTestReport
