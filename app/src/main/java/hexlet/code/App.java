@@ -15,11 +15,11 @@ public class App {
         String port = System.getenv().getOrDefault("PORT", "7070");
         return Integer.valueOf(port);
     }
-    private static String getDBURL () {
-        String URL =  System.getenv()
+    private static String getDBURL() {
+        return  System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL",
                         "jdbc:h2:mem:project");
-        return URL;
+
     }
 
     public static Javalin getApp() {
