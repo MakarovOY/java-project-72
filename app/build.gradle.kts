@@ -22,6 +22,7 @@ dependencies {
     implementation("io.javalin:javalin:6.1.3")
     implementation("io.javalin:javalin-bundle:6.1.3")
     implementation("io.javalin:javalin-rendering:6.1.3")
+    implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("org.slf4j:slf4j-simple:2.0.10")
     testImplementation("org.slf4j:slf4j-simple:2.0.13")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))

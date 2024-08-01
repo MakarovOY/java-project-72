@@ -1,6 +1,11 @@
 package hexlet.code;
 
 import com.zaxxer.hikari.HikariConfig;
+import gg.jte.ContentType;
+import gg.jte.TemplateEngine;
+import gg.jte.resolve.ResourceCodeResolver;
+import hexlet.code.util.NamedRoots;
+import hexlet.code.controllers.RootController;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +33,17 @@ public class App {
 
         Javalin app = Javalin.create(javalinConfig -> {
             javalinConfig.bundledPlugins.enableDevLogging();
-            javalinConfig.fileRenderer(new JavalinJte());
+            javalinConfig.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
-        app.get("/", ctx -> ctx.result("Hello World"));
+        app.get(NamedRoots.rootPath(), RootController::index);
         return app;
 
     }
+    private static TemplateEngine createTemplateEngine() {
+        ClassLoader classLoader = App.class.getClassLoader();
+        ResourceCodeResolver codeResolver = new ResourceCodeResolver("templates", classLoader);
+        TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html);
+        return templateEngine;
+    }
+
 }
