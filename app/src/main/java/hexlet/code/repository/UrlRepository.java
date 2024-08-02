@@ -2,7 +2,12 @@ package hexlet.code.repository;
 
 import hexlet.code.model.Url;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +17,22 @@ public class UrlRepository extends BaseRepository{
 
     public static void save(Url url) throws SQLException {
         String sql = "INSERT INTO urls (url, created_at) VALUES (?, ?)";
-        try (Connection conn = dataSource.getConnection();
+        try (var conn = dataSource.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
              preparedStatement.setString(1, url.getName());
              LocalDateTime localDateTime = LocalDateTime.now();
              preparedStatement.setTimestamp(2, Timestamp.valueOf(localDateTime));
+             preparedStatement.executeUpdate();
              ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 url.setId(generatedKeys.getLong("id"));
                 url.setCreatedAt(localDateTime);
-            } else throw new SQLException();
+            } else throw new SQLException("что-то пошло не так");
         }
     }
 
     public static Optional<Url> find(Long id) throws SQLException {
-        var sql = "SELECT * FROM cars WHERE id = ?";
+        var sql = "SELECT * FROM urls WHERE id = ?";
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             stmt.setLong(1, id);
