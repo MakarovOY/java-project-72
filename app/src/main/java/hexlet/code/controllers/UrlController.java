@@ -25,10 +25,11 @@ public class UrlController {
         UrlRepository.save(url);
         try {
             var uri = new URI(url.getName());
+            uri.toURL();
             System.out.println(uri.getHost());
             System.out.println(uri.getPath());
             System.out.println(uri);
-        } catch (URISyntaxException e) {
+        } catch (Exception e) {
             ctx.sessionAttribute("flash", "Некорректный URL Uncorrect URL");
             System.out.println("///////////////////блок try");
             ctx.redirect(NamedRoots.urlsPath());
