@@ -9,8 +9,8 @@ import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 
 import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
+
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,29 +37,22 @@ public class UrlController {
         }
         ctx.sessionAttribute("flash", "Страница успешно добавлена, Page successfully added");
         ctx.redirect(NamedRoots.urlsPath());
-
-
-
-
     }
 
-    public static void index(Context ctx) throws SQLException{
+    public static void index(Context ctx) throws SQLException {
         String flash = ctx.consumeSessionAttribute("flash");
         List<Url> urls = UrlRepository.getEntities();
         UrlsPage page = new UrlsPage(urls);
         page.setFlash(flash);
-
         ctx.render("urls/index.jte", model("page", page));
-
-
     }
 
     public static void show(Context ctx) throws SQLException {
         long id = ctx.pathParamAsClass("id", Long.class).get();
-        Url url = UrlRepository.find(id).orElseThrow(() -> new NotFoundResponse(String.format("Entity with id = %s not found", id)));
+        Url url = UrlRepository
+                .find(id).orElseThrow(() -> new NotFoundResponse(String.format("Entity with id = %s not found", id)));
         UrlPage page = new UrlPage(url);
         ctx.render("urls/show.jte", model("page", page));
-
     }
 
 }
