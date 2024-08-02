@@ -1,6 +1,7 @@
 @import gg.jte.Content
+@import hexlet.code.dto.urls.BasePage
 @param Content content
-<%--@param BasePage page = null--%>
+@param BasePage page = null
 
 <!doctype html>
 <html lang="en">
@@ -13,9 +14,9 @@
 </head>
 <body>
 
-<%--@if(page != null && page.getFlash() != null)--%>
-<%--    <p>${page.getFlash()}</p>--%>
-<%--@endif--%>
+@if(page != null && page.getFlash() != null)
+    <p>${page.getFlash()}</p>
+@endif
 ${content}
 </body>
 </html>

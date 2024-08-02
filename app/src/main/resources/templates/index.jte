@@ -1,6 +1,9 @@
 @import hexlet.code.util.NamedRoots
+@import hexlet.code.dto.urls.BasePage
 
-@template.layout.page(content = @`
+
+@template.layout.page(
+content = @`
 <%--    <p>Hello World</p>--%>
     <a href="${NamedRoots.urlsPath()}">ссылка</a>
     <form action="${NamedRoots.urlsPath()}" method="post">

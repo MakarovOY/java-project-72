@@ -5,7 +5,7 @@ ENV PORT=7070
 
 WORKDIR /app
 
-COPY /app .
+#COPY /app .
 
 RUN gradle installDist
 

@@ -3,23 +3,11 @@
 
 @param UrlsPage page
 
-@template.layout.page(
+@template.layout.page(page = page,
 content = @`
-    <p>Hello World again</p>
 
-    <h1>Cars List</h1>
+    <h1>Urls List</h1>
 
-<%--    @if(page.getUrls().isEmpty())--%>
-<%--        <p>Urls list is empty</p>--%>
-<%--    @else--%>
-<%--        @for(var url : page.getUrls())--%>
-<%--            <div>--%>
-<%--                <h2>--%>
-<%--                    ${url.getName()}--%>
-<%--                </h2>--%>
-<%--            </div>--%>
-<%--        @endfor--%>
-<%--    @endif--%>
 
         @for(var url : page.getUrls())
             <div>
@@ -33,10 +21,3 @@ content = @`
 `
 )
 
-
-<%--@template.layout.page(--%>
-
-<%--content = @`--%>
-<%--    <p>Hello World again</p>--%>
-<%--`--%>
-<%--)--%>
