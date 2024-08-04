@@ -1,16 +1,19 @@
 package hexlet.code.controllers;
 
+import hexlet.code.dto.urls.BasePage;
 import hexlet.code.dto.urls.UrlPage;
 import hexlet.code.dto.urls.UrlsPage;
 import hexlet.code.model.Url;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.NamedRoots;
+import hexlet.code.util.UrlUtil;
 import io.javalin.http.Context;
 import io.javalin.http.NotFoundResponse;
 
 import java.net.URI;
 
 
+import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,21 +24,24 @@ public class UrlController {
     public static void create(Context ctx) throws SQLException {
 
         String urlString = ctx.formParam("url");
-        Url url = new Url(urlString);
-        UrlRepository.save(url);
-        try {
-            var uri = new URI(url.getName());
-            uri.toURL();
-            System.out.println(uri.getHost());
-            System.out.println(uri.getPath());
-            System.out.println(uri);
-        } catch (Exception e) {
-            ctx.sessionAttribute("flash", "Некорректный URL Uncorrect URL");
-            System.out.println("///////////////////блок try");
-            ctx.redirect(NamedRoots.urlsPath());
-            return;
-        }
-        ctx.sessionAttribute("flash", "Страница успешно добавлена, Page successfully added");
+       try {
+           String parsedUrlString = UrlUtil.parse(urlString);
+           boolean urlIsAlreadyExistInDB = UrlRepository.getEntities().stream().filter(u -> u.getName().equals(parsedUrlString)).findFirst().isEmpty();
+           if(!urlIsAlreadyExistInDB) {
+               ctx.sessionAttribute("flash", "Страница уже существует, Page is already added");
+           } else {
+               Url url = new Url(parsedUrlString);
+               UrlRepository.save(url);
+               ctx.sessionAttribute("flash", "Страница успешно добавлена, Page successfully added");
+           }
+       } catch (Exception e) {
+           ctx.sessionAttribute("flash", "Некорректный URL,Incorrect URL");
+           String flash = ctx.consumeSessionAttribute("flash");
+           var basepage = new BasePage();
+           basepage.setFlash(flash);
+           ctx.render("index.jte", model("page", basepage));
+           return;
+       }
         ctx.redirect(NamedRoots.urlsPath());
     }
 
