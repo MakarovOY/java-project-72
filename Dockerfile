@@ -1,4 +1,4 @@
-FROM czy21/jdk-21
+FROM gradle:8.5.0-jdk
 
 ##
 ENV PORT=7070
