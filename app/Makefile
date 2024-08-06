@@ -13,8 +13,8 @@ build:
 test:
 	./gradlew test
 
-report:
-	./gradlew jacocoTestReport
+#report:
+#	./gradlew jacocoTestReport
 
 report:
 	gradle jacocoTestReport
