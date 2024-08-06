@@ -22,13 +22,13 @@ jobs:
       - name: Build with Gradle
         run: gradle build test checkstyleMain
         working-directory: app
-      - name: Publish code coverage
-        if: ${{ github.event_name == 'push' }}
-        uses: paambaati/codeclimate-action@v3.1.1
-        env:
-          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
-          JACOCO_SOURCE_PATH: ${{github.workspace}}/app/src/main/java
-        with:
-          coverageCommand: make report
-          debug: true
-          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
+#      - name: Publish code coverage
+#        if: ${{ github.event_name == 'push' }}
+#        uses: paambaati/codeclimate-action@v3.1.1
+#        env:
+#          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+#          JACOCO_SOURCE_PATH: ${{github.workspace}}/app/src/main/java
+#        with:
+#          coverageCommand: make report
+#          debug: true
+#          coverageLocations: ${{github.workspace}}/app/build/reports/jacoco/test/jacocoTestReport.xml:jacoco
