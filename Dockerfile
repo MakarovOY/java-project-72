@@ -14,7 +14,7 @@ WORKDIR /app
 #COPY gradlew .
 
 
-RUN ./gradlew --no-daemon dependencies
+#RUN ./gradlew --no-daemon dependencies
 
 COPY app/src src
 #COPY config config
