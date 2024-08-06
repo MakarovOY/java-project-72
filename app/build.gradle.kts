@@ -3,7 +3,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     application
-    jacoco
+    id ("jacoco")
     id ("checkstyle")
     id("io.freefair.lombok") version "8.6"
     id("com.github.johnrengelman.shadow") version "8.1.1"
@@ -17,9 +17,8 @@ application {
     mainClass.set("hexlet.code.App")
 }
 jacoco {
-    toolVersion = "0.7.9"
-
-
+    toolVersion = "0.8.9"
+    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
 repositories {
     mavenCentral()
@@ -34,6 +33,7 @@ dependencies {
     implementation("com.h2database:h2:2.2.220")
     implementation("org.slf4j:slf4j-simple:2.0.10")
     testImplementation("org.slf4j:slf4j-simple:2.0.13")
+    testImplementation("org.assertj:assertj-core:3.25.3")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }

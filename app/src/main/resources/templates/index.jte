@@ -6,6 +6,9 @@ content = @`
     <a href="${NamedRoots.urlsPath()}">ссылка</a>
     <form action="${NamedRoots.urlsPath()}" method="post">
         <div>
+            <h1>
+                Анализатор страниц
+            </h1>
         <label>url</label>
         <input  type="text"  name="url">
         <div id>
