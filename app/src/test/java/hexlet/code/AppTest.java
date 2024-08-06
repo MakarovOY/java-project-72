@@ -1,6 +1,5 @@
 package hexlet.code;
 
-import hexlet.code.repository.UrlRepository;
 import hexlet.code.util.NamedRoots;
 import io.javalin.Javalin;
 import io.javalin.testtools.JavalinTest;
