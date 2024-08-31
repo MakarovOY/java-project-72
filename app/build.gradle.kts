@@ -18,7 +18,7 @@ application {
 }
 jacoco {
     toolVersion = "0.8.9"
-    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
+//    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
 repositories {
     mavenCentral()
@@ -32,10 +32,14 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("com.h2database:h2:2.2.220")
     implementation("org.slf4j:slf4j-simple:2.0.10")
+    // https://mvnrepository.com/artifact/com.konghq/unirest-java
+    implementation("com.konghq:unirest-java:3.14.5")
+    implementation("org.jsoup:jsoup:1.18.1")
     testImplementation("org.slf4j:slf4j-simple:2.0.13")
     testImplementation("org.assertj:assertj-core:3.25.3")
     testImplementation(platform("org.junit:junit-bom:5.9.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0")
 }
 
 tasks.test {

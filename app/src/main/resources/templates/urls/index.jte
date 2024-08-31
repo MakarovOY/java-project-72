@@ -5,19 +5,52 @@
 
 @template.layout.page(page = page,
 content = @`
+    <section>
 
-    <h1>Urls List</h1>
+        <div class="container-lg mt-5">
+            <h1>Сайты</h1>
 
+            <table class="table table-bordered table-hover mt-3">
+                <thead>
+                <tr>
+                    <th class="col-1">ID</th>
+                    <th>Имя</th>
+                    <th class="col-2">Последняя проверка</th>
+                    <th class="col-1">Код ответа</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for(var url: page.getUrls())
+                <tr>
+                    <td>
+                        ${url.getId()}
+                    </td>
+                    <td>
+                        <a href="${NamedRoots.urlsPath()}/${url.getId()}">${url.getName()}</a>
+                    </td>
+                    <td>
+                        @if(page.getLastChecks().get(url.getId()) != null)
+                         ${page.getLastChecks().get(url.getId()).getCreatedAt().toLocalDateTime().format(page.getLastChecks().get(url.getId()).getDateTimeFormatter())}
+                         @endif
+                    </td>
+                    <td>
+                        @if(page.getLastChecks().get(url.getId()) != null)
+                            ${page.getLastChecks().get(url.getId()).getStatusCode()}
+                        @endif
 
-        @for(var url : page.getUrls())
-            <div>
-                <h2>
-                    ${url.getName()}
-                </h2>
-            </div>
-        @endfor
+                    </td>
 
+                </tr>
 
+                </tbody>
+            </table>
+
+                @endfor
+
+        </div>
+
+    </section>
 `
 )
+
 

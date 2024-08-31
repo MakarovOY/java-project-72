@@ -1,15 +1,13 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,15 +18,16 @@ public class UrlRepository extends BaseRepository {
         try (var conn = dataSource.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, url.getName());
-            LocalDateTime localDateTime = LocalDateTime.now();
-            preparedStatement.setTimestamp(2, Timestamp.valueOf(localDateTime));
+            Date date = new Date();
+            Timestamp timestamp = new Timestamp(date.getTime());
+            preparedStatement.setTimestamp(2, timestamp);
             preparedStatement.executeUpdate();
             ResultSet generatedKeys = preparedStatement.getGeneratedKeys();
             if (generatedKeys.next()) {
                 url.setId(generatedKeys.getLong("id"));
-                url.setCreatedAt(localDateTime);
+                url.setCreatedAt(timestamp);
             } else {
-                throw new SQLException("что-то пошло не так");
+                throw new SQLException("error");
             }
         }
     }
@@ -41,16 +40,17 @@ public class UrlRepository extends BaseRepository {
             var resultSet = stmt.executeQuery();
             if (resultSet.next()) {
                 String name = resultSet.getString("url");
-                LocalDateTime localDateTime = resultSet.getTimestamp("created_at").toLocalDateTime();
+                Timestamp timestamp = resultSet.getTimestamp("created_at");
                 Url url = new Url();
                 url.setName(name);
                 url.setId(id);
-                url.setCreatedAt(localDateTime);
+                url.setCreatedAt(timestamp);
                 return Optional.of(url);
             }
             return Optional.empty();
         }
     }
+
     public static List<Url> getEntities() throws SQLException {
         var sql = "SELECT * FROM urls";
         try (var conn = dataSource.getConnection();
@@ -60,16 +60,14 @@ public class UrlRepository extends BaseRepository {
             while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
                 String name = resultSet.getString("url");
-                LocalDateTime localDateTime = resultSet.getTimestamp("created_at").toLocalDateTime();
+                Timestamp timestamp = resultSet.getTimestamp("created_at");
                 Url url = new Url();
                 url.setName(name);
                 url.setId(id);
-                url.setCreatedAt(localDateTime);
+                url.setCreatedAt(timestamp);
                 result.add(url);
             }
             return result;
         }
-
     }
-
 }

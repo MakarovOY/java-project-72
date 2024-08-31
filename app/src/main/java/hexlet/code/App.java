@@ -5,6 +5,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
+import hexlet.code.controllers.UrlCheckController;
 import hexlet.code.controllers.UrlController;
 import hexlet.code.controllers.RootController;
 import hexlet.code.repository.BaseRepository;
@@ -12,7 +13,6 @@ import hexlet.code.util.NamedRoots;
 import io.javalin.Javalin;
 import io.javalin.rendering.template.JavalinJte;
 import lombok.extern.slf4j.Slf4j;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
@@ -32,7 +32,6 @@ public class App {
         return  System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL",
                         "jdbc:h2:mem:project");
-
     }
 
     public static Javalin getApp() throws SQLException {
@@ -56,10 +55,9 @@ public class App {
         app.get(NamedRoots.rootPath(), RootController::index);
         app.post(NamedRoots.urlsPath(), UrlController::create);
         app.get(NamedRoots.urlsPath(), UrlController::index);
-
         app.get(NamedRoots.urlPath("{id}"), UrlController::show);
+        app.post(NamedRoots.urlChecksPath("{id}"), UrlCheckController::create);
         return app;
-
     }
     private static TemplateEngine createTemplateEngine() {
         ClassLoader classLoader = App.class.getClassLoader();
@@ -67,5 +65,4 @@ public class App {
         TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html);
         return templateEngine;
     }
-
 }
