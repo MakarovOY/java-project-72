@@ -18,7 +18,6 @@ application {
 }
 jacoco {
     toolVersion = "0.8.9"
-//    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
 }
 repositories {
     mavenCentral()
