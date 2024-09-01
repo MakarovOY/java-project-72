@@ -27,7 +27,7 @@ public class UrlRepository extends BaseRepository {
                 url.setId(generatedKeys.getLong("id"));
                 url.setCreatedAt(timestamp);
             } else {
-                throw new SQLException("error");
+                throw new SQLException("Error!");
             }
         }
     }
