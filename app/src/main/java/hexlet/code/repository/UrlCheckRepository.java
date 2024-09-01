@@ -60,7 +60,7 @@ public class UrlCheckRepository extends BaseRepository {
         }
     }
 
-    public static Map<Long, UrlCheck> getlastchecks() throws SQLException {
+    public static Map<Long, UrlCheck> getLastChecks() throws SQLException {
         var sql = "SELECT DISTINCT ON (url_id) * FROM url_checks ORDER BY url_id DESC, id DESC";
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {

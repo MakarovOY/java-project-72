@@ -25,27 +25,27 @@ content = @`
                     <td>
                         ${url.getId()}
                     </td>
+
                     <td>
                         <a href="${NamedRoots.urlsPath()}/${url.getId()}">${url.getName()}</a>
                     </td>
+
                     <td>
                         @if(page.getLastChecks().get(url.getId()) != null)
                          ${page.getLastChecks().get(url.getId()).getCreatedAt().toLocalDateTime().format(page.getLastChecks().get(url.getId()).getDateTimeFormatter())}
                          @endif
                     </td>
+
                     <td>
                         @if(page.getLastChecks().get(url.getId()) != null)
                             ${page.getLastChecks().get(url.getId()).getStatusCode()}
                         @endif
-
                     </td>
 
                 </tr>
-
+                @endfor
                 </tbody>
             </table>
-
-                @endfor
 
         </div>
 

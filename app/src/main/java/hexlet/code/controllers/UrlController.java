@@ -57,7 +57,7 @@ public class UrlController {
         String flash = ctx.consumeSessionAttribute("flash");
         String flashType = ctx.consumeSessionAttribute("flashType");
         List<Url> urls = UrlRepository.getEntities();
-        Map<Long, UrlCheck> lastChecks = UrlCheckRepository.getlastchecks();
+        Map<Long, UrlCheck> lastChecks = UrlCheckRepository.getLastChecks();
         UrlsPage page = new UrlsPage(urls, lastChecks);
         page.setFlash(flash);
         page.setFlashType(flashType);
