@@ -31,7 +31,7 @@ public class App {
     private static String getDBURL() {
         return  System.getenv()
                 .getOrDefault("JDBC_DATABASE_URL",
-                        "jdbc:h2:mem:project");
+                        "jdbc:h2:mem:project;DB_CLOSE_DELAY=-1;");
     }
 
     public static Javalin getApp() throws SQLException {
