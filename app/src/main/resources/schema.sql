@@ -12,11 +12,11 @@ CREATE TABLE urls (
 CREATE TABLE url_checks
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    url_id SERIAL REFERENCES urls (id),
+    url_id BIGINT REFERENCES urls (id),
     status_code INT,
     h1 VARCHAR,
     title VARCHAR,
-    description VARCHAR,
+    description TEXT,
     created_at TIMESTAMP
 );
 

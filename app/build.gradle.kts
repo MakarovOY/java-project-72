@@ -30,7 +30,7 @@ dependencies {
     implementation("io.javalin:javalin-rendering:6.1.3")
     implementation("com.zaxxer:HikariCP:5.1.0")
     implementation("com.h2database:h2:2.2.220")
-    implementation("org.postgresql:postgresql:42.7.1")
+    implementation("org.postgresql:postgresql:42.7.2")
     implementation("org.slf4j:slf4j-simple:2.0.10")
     // https://mvnrepository.com/artifact/com.konghq/unirest-java
     implementation("com.konghq:unirest-java:3.14.5")
