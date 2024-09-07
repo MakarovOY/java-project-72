@@ -14,7 +14,7 @@ import java.util.Optional;
 public class UrlRepository extends BaseRepository {
 
     public static void save(Url url) throws SQLException {
-        String sql = "INSERT INTO urls (url, created_at) VALUES (?, ?)";
+        String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
         try (var conn = dataSource.getConnection();
              PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, url.getName());
@@ -39,7 +39,7 @@ public class UrlRepository extends BaseRepository {
             stmt.setLong(1, id);
             var resultSet = stmt.executeQuery();
             if (resultSet.next()) {
-                String name = resultSet.getString("url");
+                String name = resultSet.getString("name");
                 Timestamp timestamp = resultSet.getTimestamp("created_at");
                 Url url = new Url();
                 url.setName(name);
@@ -59,7 +59,7 @@ public class UrlRepository extends BaseRepository {
             var result = new ArrayList<Url>();
             while (resultSet.next()) {
                 Long id = resultSet.getLong("id");
-                String name = resultSet.getString("url");
+                String name = resultSet.getString("name");
                 Timestamp timestamp = resultSet.getTimestamp("created_at");
                 Url url = new Url();
                 url.setName(name);

@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS urls;
 
 CREATE TABLE urls (
     id SERIAL PRIMARY KEY NOT NULL,
-    url VARCHAR NOT NULL,
+    name VARCHAR NOT NULL,
     created_at TIMESTAMP
 );
 
