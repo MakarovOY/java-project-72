@@ -5,7 +5,6 @@ import com.zaxxer.hikari.HikariDataSource;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
-import hexlet.code.controllers.UrlCheckController;
 import hexlet.code.controllers.UrlController;
 import hexlet.code.controllers.RootController;
 import hexlet.code.repository.BaseRepository;
@@ -53,10 +52,10 @@ public class App {
             javalinConfig.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
         app.get(NamedRoots.rootPath(), RootController::index);
-        app.post(NamedRoots.urlsPath(), UrlController::create);
+        app.post(NamedRoots.urlsPath(), UrlController::createUrl);
         app.get(NamedRoots.urlsPath(), UrlController::index);
         app.get(NamedRoots.urlPath("{id}"), UrlController::show);
-        app.post(NamedRoots.urlChecksPath("{id}"), UrlCheckController::create);
+        app.post(NamedRoots.urlChecksPath("{id}"), UrlController::createUrlCheck);
         return app;
     }
     private static TemplateEngine createTemplateEngine() {
